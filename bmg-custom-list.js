@@ -3,38 +3,38 @@
         e = '[bmg-custom-list = "category"]',
         o = ".w-dyn-item";
     function r(e, r) {
-        let a = f(e);
+        let u = f(e);
         for (
             r.find(o).each(function () {
                 let e = $(this).find(t).text();
-                for (i = 0, n = a.length; i < n; i++) a[i].name == e && a[i].eventCount++;
+                for (i = 0, n = u.length; i < n; i++) u[i].name == e && u[i].eventCount++;
             }),
                 i = 0,
-                n = a.length;
+                n = u.length;
             i < n;
             i++
         ) {
-            let u = a[i].$eventCounter,
-                l = { val: parseInt(u.text()) };
+            let a = u[i].$eventCounter,
+                l = { val: parseInt(a.text()) };
             gsap.to(l, {
                 duration: 1,
                 ease: "power4.out",
-                val: a[i].eventCount,
+                val: u[i].eventCount,
                 onUpdate: function () {
-                    u.text(l.val.toFixed(0));
+                    a.text(l.val.toFixed(0));
                 },
             });
         }
     }
-    function a(t, r, a, f) {
+    function u(t, r, u, f) {
         t.find(o).each(function () {
             let o = $(this).find(e),
                 l = o.text();
             if (
                 (o.parent().click(function () {
-                    u(t, r, l, f);
+                    a(t, r, l, f);
                 }),
-                "month" != a)
+                "month" != u)
             ) {
                 0 == o.parent().next().length &&
                     o.parent().parent().append(`<div bmg-custom-list="reset" data-alt="${l} reseter." style="display: inline-block; margin-left: 1.125rem; text-decoration: underline; cursor: pointer">Back to All Events</div>`);
@@ -47,14 +47,14 @@
                             t.find(e).each(function () {
                                 gsap.to($(this)[0], { color: "#fff", duration: 0.35 }), gsap.to($(this).parent()[0], { backgroundColor: "rgba(255, 255, 255, 0.1)", duration: 0.35 });
                             }),
-                            u(t, r, "month", f);
+                            a(t, r, "month", f);
                     });
             }
         });
     }
-    function u(t, e, o, u) {
+    function a(t, e, o, a) {
         for (t.empty(), i = 0, n = e.length; i < n; i++) ("month" == o || e[i].category == o) && t.append(e[i].$);
-        a(t, e, o, u), r(u, t);
+        u(t, e, o, a), r(a, t);
     }
     function f(t) {
         let e = [];
@@ -66,15 +66,15 @@
         );
     }
     function l(o, r) {
-        let a = f(r),
-            u = [];
+        let u = f(r),
+            a = [];
         return (
             o.each(function () {
                 let o = $(this).find(t).text();
-                u.push({ $: $(this), sortNum: c(o, a), month: "" != o ? o : a[0].name, category: $(this).find(e).text() });
+                a.push({ $: $(this), sortNum: c(o, u), month: "" != o ? o : u[0].name, category: $(this).find(e).text() });
             }),
-            u.sort((t, e) => (t.sortNum > e.sortNum ? 1 : e.sortNum > t.sortNum ? -1 : 0)),
-            u
+            a.sort((t, e) => (t.sortNum > e.sortNum ? 1 : e.sortNum > t.sortNum ? -1 : 0)),
+            a
         );
     }
     function c(t, e) {
@@ -83,7 +83,7 @@
     }
     $(".w-dyn-list").each(function () {
         let t = $(this);
-        ($list = t.find(".w-dyn-items")), ($prevButton = t.parent().find(prevButtonSelector)), ($nextButton = t.parent().find(nextButtonSelector)), ($tabsMenu = t.parent().find(".journey_tabs-menu"));
-        u($list, l(t.find(o), $tabsMenu), "month", $tabsMenu);
+        ($list = t.find(".w-dyn-items")), ($tabsMenu = t.parent().find(".journey_tabs-menu"));
+        a($list, l(t.find(o), $tabsMenu), "month", $tabsMenu);
     });
 })();
