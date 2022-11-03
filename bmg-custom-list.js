@@ -24,7 +24,7 @@
                     g = s[i2].name;
                 i2 < 2 ? (h <= 1 ? (l += ", " + g) : (l += ", (" + h + "\xd7) " + g)) : (c += h);
             }
-            (l = l.substring(2) + (c > 0 ? ",\n+ " + c + " more" : "")), r.text(l);
+            (l = l.substring(2) + (c > 0 ? ",<br>+ " + c + " more" : "")), r.html(l);
         }
     }
     function l(t) {
