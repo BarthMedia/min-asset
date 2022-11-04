@@ -19,32 +19,34 @@
     }
     $(".w-dyn-list").each(function () {
         let l = $(this).find(".w-dyn-items"),
-            u = $(this).parent().find(".journey_tabs-menu");
-        ($tabs = u.find(o)),
+            p = $(this).parent().find(".journey_tabs-menu");
+        ($tabs = p.find(o)),
             ($prevButton = $(this).parent().find('[bmg-custom-list = "prev"]')),
             ($nextButton = $(this).parent().find('[bmg-custom-list = "next"]')),
             ($nextSlideText = $(this).parent().find('[bmg-custom-list = "next-slide"]'));
-        let f,
-            p,
+        let u,
+            f,
             h,
             m = c($tabs),
             b = 0,
-            x,
-            y;
+            y,
+            x;
         function _() {
-            (f = $(window).width()), (p = l.find(e).length), (x = $tabs.width()), (y = u[0].scrollWidth - f);
+            (u = $(window).width()), (f = l.find(e).length), (y = $tabs.width()), (x = p[0].scrollWidth - u);
         }
         function g(t) {
-            d(l, Math.min(Math.max((h += t), 0), p - 1) * f);
+            d(l, Math.min(Math.max((h += t), 0), f - 1) * u);
         }
         function w() {
-            h = l.scrollLeft() / f;
+            h = l.scrollLeft() / u;
             let d = l.find(e).eq(h),
                 c = d.find(t).text();
             for (
-                newSlideNextText = `${h + 2}/${p} - ${(nextCategoryText = ($nextDynItem = d.next()).find('[bmg-custom-list = "category"]').text())}`,
+                newSlideNextText = `${h + 2}/${f} - ${(nextCategoryText = ($nextDynItem = d.next()).find('[bmg-custom-list = "category"]').text())}`,
                     $nextSlideText.text(newSlideNextText),
-                    h + 1 >= p
+                    f <= 1
+                        ? (gsap.set($nextSlideText.parent()[0], { opacity: 0 }), gsap.to($nextButton[0], { opacity: 0, pointerEvents: "none", duration: 0.35 }), gsap.to($prevButton[0], { opacity: 0, pointerEvents: "auto", duration: 0.35 }))
+                        : h + 1 >= f
                         ? (gsap.set($nextSlideText.parent()[0], { opacity: 0 }), gsap.to($nextButton[0], { opacity: 0, pointerEvents: "none", duration: 0.35 }), gsap.to($prevButton[0], { opacity: 1, pointerEvents: "auto", duration: 0.35 }))
                         : h > 0
                         ? (gsap.to($nextSlideText.parent()[0], { opacity: 1, duration: 0.35 }),
@@ -59,8 +61,8 @@
                 i++
             )
                 if (m[i].name == c || "" == c) {
-                    let u = $tabs.find(a);
-                    u.each(function (t) {
+                    let p = $tabs.find(a);
+                    p.each(function (t) {
                         if (t != i) {
                             let e = $(this).closest(o),
                                 r = e.find(s);
@@ -71,16 +73,16 @@
                                 gsap.to(e[0], { borderTopWidth: 1, borderTopColor: "rgba(255, 255, 255, 0.2)", duration: 0.35 });
                         }
                     });
-                    let x = u.closest(o).eq(b);
-                    x.css({ "border-left-width": "1px", "border-right-width": "1px" }), x.next().css({ "border-left-width": "0px" }), x.removeClass(r), (b = i);
-                    let y = m[i].$.find(a),
-                        _ = y.closest(o),
+                    let y = p.closest(o).eq(b);
+                    y.css({ "border-left-width": "1px", "border-right-width": "1px" }), y.next().css({ "border-left-width": "0px" }), y.removeClass(r), (b = i);
+                    let x = m[i].$.find(a),
+                        _ = x.closest(o),
                         g = _.find(s);
                     _.addClass(r),
                         _.prev().css({ "border-right-width": "0px" }),
                         _.css({ "border-left-width": "1px", "border-right-width": "1px" }),
                         _.next().css({ "border-left-width": "0px" }),
-                        gsap.to(y[0], { height: "auto", duration: 0.35 }),
+                        gsap.to(x[0], { height: "auto", duration: 0.35 }),
                         gsap.to(g[0], { opacity: 0, duration: 0.35 }),
                         gsap.to(_[0], { borderTopWidth: 3, borderTopColor: "#fff", duration: 0.35 }),
                         v(i, !1);
@@ -88,14 +90,14 @@
                 }
         }
         function v(o, r) {
-            if (((eventCount = parseInt($tabs.eq(o).find('[fs-countitems-element = "value"]').text())), u.stop().animate({ scrollLeft: Math.min(x * o, y) }, 700), r && eventCount)) {
+            if (((eventCount = parseInt($tabs.eq(o).find('[fs-countitems-element = "value"]').text())), p.stop().animate({ scrollLeft: Math.min(y * o, x) }, 700), r && eventCount)) {
                 let s = l.find(e),
                     a = m[o].name,
                     c = 0;
                 s.each(function (e) {
                     if (("" == $(this).find(t).text() ? m[0].name : $(this).find(t).text()) == a) return (c = e), !1;
                 }),
-                    d(l, c * f);
+                    d(l, c * u);
             }
         }
         $(window).resize(_),
@@ -105,7 +107,7 @@
             _(),
             w(),
             l.scroll(function () {
-                l.scrollLeft() % f == 0 && w();
+                l.scrollLeft() % u == 0 && w();
             }),
             $prevButton.click(() => {
                 g(-1);
