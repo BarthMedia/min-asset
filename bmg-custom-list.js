@@ -9,22 +9,21 @@
         let o = m(e);
         for (i = 0, n = o.length; i < n; i++) {
             let r = o[i].$.find(u),
-                s = r.text().substring(6).split("$X$X$X"),
-                a = s.length,
-                l = "",
-                c = 0;
-            for (i2 = 0, n2 = a; i2 < n2; i2++) {
-                let f = s[i2],
-                    d = 0;
-                for (i3 = 0, n3 = n2; i3 < n3; i3++) s[i3] == f && (d++, (s[i3] = ""));
-                "" != f && s.push({ name: f, count: d });
+                s = r.text();
+            if (((categoriesArrayLength = (categoriesArray = s.substring(6).split("$X$X$X")).length), (newString = ""), (writeOutUpToXCategories = 2), (notWrittenCounter = 0), s.indexOf("$X$X$X") > -1)) {
+                for (i2 = 0, n2 = categoriesArrayLength; i2 < n2; i2++) {
+                    let a = categoriesArray[i2],
+                        l = 0;
+                    for (i3 = 0, n3 = n2; i3 < n3; i3++) categoriesArray[i3] == a && (l++, (categoriesArray[i3] = ""));
+                    "" != a && categoriesArray.push({ name: a, count: l });
+                }
+                for (categoriesArray.splice(0, categoriesArrayLength), categoriesArrayLength = categoriesArray.length, i2 = 0, n2 = categoriesArrayLength; i2 < n2; i2++) {
+                    let c = categoriesArray[i2].count,
+                        f = categoriesArray[i2].name;
+                    i2 < writeOutUpToXCategories ? (c <= 1 ? (newString += ", " + f) : (newString += ", (" + c + "\xd7) " + f)) : (notWrittenCounter += c);
+                }
+                (newString = newString.substring(2) + (notWrittenCounter > 0 ? ",<br>+ " + notWrittenCounter + " more" : "")), r.html(newString);
             }
-            for (s.splice(0, a), a = s.length, i2 = 0, n2 = a; i2 < n2; i2++) {
-                let h = s[i2].count,
-                    g = s[i2].name;
-                i2 < 2 ? (h <= 1 ? (l += ", " + g) : (l += ", (" + h + "\xd7) " + g)) : (c += h);
-            }
-            (l = l.substring(2) + (c > 0 ? ",<br>+ " + c + " more" : "")), r.html(l);
         }
     }
     function l(t) {
