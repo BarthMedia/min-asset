@@ -1,0 +1,1 @@
+(()=>{let i='[bmg-uwsc="Slider Trigger"]';$(i).each(function(c){$(this).find('[bmg-uwsc="Slide Nav Trigger"]').each(function(){$(this).children().each(function(e){$(this).click(()=>{$(i).eq(c).find(".w-slider-nav").children().eq(e).click()})})})})})();
