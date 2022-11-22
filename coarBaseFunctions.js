@@ -4,7 +4,7 @@
         let e = $(this),
             n = e.find('[bmg-arco = "c-list-item"]').eq(0).clone(),
             a = new XMLHttpRequest();
-        a.open("GET", "https://x8ki-letl-twmt.n7.xano.io/api:4lTavcfO/component_list", !0),
+        a.open("GET", "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list", !0),
             (a.onload = function () {
                 let o = JSON.parse(this.response);
                 a.status >= 200 && a.status < 400
@@ -22,7 +22,7 @@
             }),
             a.send();
     });
-    let e = "https://x8ki-letl-twmt.n7.xano.io/api:4lTavcfO/component_list/",
+    let e = "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list/",
         n = "",
         a = "";
     function o(t, o, s) {
