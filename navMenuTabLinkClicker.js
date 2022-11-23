@@ -1,0 +1,1 @@
+(()=>{let t=$('[bmg-element = "Navigation tabs menu"]').children(),n=document.location.pathname,a="aria-controls";function i(){t.each(function(){let t=$(this),i=$(`#${t.attr(a)}`),c=[];for(href of(i.find("a").each(function(){c.push($(this).attr("href"))}),c))href==n&&t.click()})}function c(){t.attr(a)?setTimeout(i,10):setTimeout(c,10)}c()})();
