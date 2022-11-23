@@ -1,1 +1,0 @@
-(()=>{let e="bmg-show-once-loader",t=document.querySelector('[bmg-element = "Page loader"]'),r=parseFloat(t.getAttribute("bmg-data")||.75);"Visited."!=Cookies.get(e)?Cookies.set(e,"Visited.",{expires:r}):t.style.setProperty("display","none","important")})();
