@@ -1,15 +1,17 @@
 (() => {
-    let e = document.querySelectorAll('[bmg_video = "embed"] > video'),
-        d = "undefined";
-    for (videoElement of ((index = 0), e))
-        index++,
-            videoElement.addEventListener("suspend", () => {
-                d = !1;
-            }),
+    let e = document.querySelectorAll("[playsinline], [autoplay]"),
+        n = "undefined";
+    for (videoElement of e)
+        videoElement.addEventListener("suspend", () => {
+            n = !1;
+        }),
             videoElement.addEventListener("play", () => {
-                d = !0;
+                n = !0;
             });
     $("body").on("click touchstart", function () {
-        if (!d) for (videoElement of e) videoElement.play();
+        if (!1 == n) {
+            for (videoElement of e) videoElement.play();
+            n = "granted";
+        }
     });
 })();
