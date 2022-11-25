@@ -7,6 +7,7 @@
         return `${a} ${o}${n(o)}, ${e.getFullYear()}`;
     }
     function n(t) {
+        if (t > 3 && t < 21) return "th";
         switch (t % 10) {
             case 1:
                 return "st";
