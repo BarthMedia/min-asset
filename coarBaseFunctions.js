@@ -1,63 +1,81 @@
 (() => {
     let t = "[bmg-arco-button]";
+    function e(t) {
+        let e = new Date(t),
+            a = e.toLocaleString("default", { month: "long" }),
+            o = e.getDate();
+        return `${a} ${o}${n(o)}, ${e.getFullYear()}`;
+    }
+    function n(t) {
+        switch (t % 10) {
+            case 1:
+                return "st";
+            case 2:
+                return "nd";
+            case 3:
+                return "rd";
+            default:
+                return "th";
+        }
+    }
     $('[bmg-arco = "c-list"]').each(function () {
-        let e = $(this),
-            n = e.find('[bmg-arco = "c-list-item"]').eq(0).clone(),
-            a = new XMLHttpRequest();
-        a.open("GET", "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list", !0),
-            (a.onload = function () {
-                let o = JSON.parse(this.response);
-                a.status >= 200 && a.status < 400
-                    ? (e.empty(),
-                      o.forEach((a) => {
-                          let o = n.clone(),
-                              i = o.find('[bmg-arco = "thumbnail"]'),
-                              c = o.find(t),
-                              l = o.find('[bmg-arco = "name"]'),
-                              r = o.find('[bmg-arco = "date"]');
-                          i.attr("src", a.thumbnail.url), s(c, a.id, a.platforms_in_use), l.text(a.name), r.text(a.created_at), e.append(o);
+        let n = $(this),
+            a = n.find('[bmg-arco = "c-list-item"]').eq(0).clone(),
+            o = new XMLHttpRequest();
+        o.open("GET", "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list", !0),
+            (o.onload = function () {
+                let s = JSON.parse(this.response);
+                o.status >= 200 && o.status < 400
+                    ? (n.empty(),
+                      s.forEach((o) => {
+                          let s = a.clone(),
+                              c = s.find('[bmg-arco = "thumbnail"]'),
+                              r = s.find(t),
+                              l = s.find('[bmg-arco = "name"]'),
+                              u = s.find('[bmg-arco = "date"]');
+                          c.attr("src", o.thumbnail.url), i(r, o.id, o.platforms_in_use), l.text(o.name), u.text(e(o.created_at)), n.append(s);
                       }),
-                      e.attr("bmg-arco-load-status", "loaded"))
-                    : e.attr("bmg-arco-load-status", a.status);
+                      n.attr("bmg-arco-load-status", "loaded"))
+                    : n.attr("bmg-arco-load-status", o.status);
             }),
-            a.send();
+            o.send();
     });
-    let e = "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list/",
-        n = "",
-        a = "";
-    function o(t, o, s) {
-        let i = t.find("img").clone();
-        function c(e) {
+    let a = "https://xju6-kpzy-l8vj.n7.xano.io/api:4lTavcfO/component_list/",
+        o = "",
+        s = "";
+    function c(t, e, n) {
+        let c = t.find("img").clone();
+        function i(e) {
             setTimeout(function () {
                 t.text(e),
                     setTimeout(function () {
-                        t.empty(), t.append(i), t.css({ "pointer-events": "auto" });
+                        t.empty(), t.append(c), t.css({ "pointer-events": "auto" });
                     }, 1500);
             }, 1500);
         }
         t.click(() => {
-            let i = new XMLHttpRequest();
+            let c = new XMLHttpRequest();
             t.css({ "pointer-events": "none" }),
                 t.empty(),
                 t.text("Copying..."),
-                i.open("GET", e + s, !0),
-                (i.onload = function () {
+                c.open("GET", a + n, !0),
+                (c.onload = function () {
                     let t = JSON.parse(this.response);
-                    i.status >= 200 && i.status < 400 ? ((n = t[o]), (a = "{" == t[o].charAt(0) ? "application/json" : "text/html"), document.execCommand("copy"), c("Copied!")) : c(`Error: ${i.status}`);
+                    c.status >= 200 && c.status < 400 ? ((o = t[e]), (s = "{" == t[e].charAt(0) ? "application/json" : "text/html"), document.execCommand("copy"), i("Copied!")) : i(`Error: ${c.status}`);
                 }),
-                i.send();
+                c.send();
         });
     }
-    function s(e, n, a) {
+    function i(e, n, a) {
         e.each(function () {
-            let e = $(this).attr(i(t)) || "none";
-            a.includes(e) ? o($(this), e, n) : $(this).remove();
+            let e = $(this).attr(r(t)) || "none";
+            a.includes(e) ? c($(this), e, n) : $(this).remove();
         });
     }
-    function i(t) {
+    function r(t) {
         return t.replace(/\[/g, "").replace(/\]/g, "");
     }
     document.addEventListener("copy", (t) => {
-        t.clipboardData.setData(a, n), t.preventDefault();
+        t.clipboardData.setData(s, o), t.preventDefault();
     });
 })();
