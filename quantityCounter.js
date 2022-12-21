@@ -1,7 +1,7 @@
 (() => {
     let t = '[bmg-element = "Input"]';
     function e(t, e, n) {
-        t.text(n), e.attr("value", n);
+        t.text(n), e.val(n), e.attr("value", n);
     }
     $('[bmg-element = "Quantity Wrapper"]').each(function () {
         let n = $(this),
