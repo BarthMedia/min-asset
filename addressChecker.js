@@ -1,0 +1,1 @@
+$('[bmg-element = "Address Step"]').each(function(){$(this).find('[data-name="City"], [data-name="State/ Province"], [data-name="Country"]').each(function(){let e=$(this);e.on("input",()=>{let t=e.val();e.val(t.replace(/[0-9]/g,""))})})});
