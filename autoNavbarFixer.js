@@ -1,0 +1,1 @@
+(()=>{let a=$(".navbar_menu-main-button"),e=$(".navbar_menu-close-button"),n=$(".navbar");a.click(()=>{n.css({position:"fixed"}),$("head").append('<style bmg-data="nav-fixer-css">::-webkit-scrollbar{ display: none; }</style>')}),e.click(()=>{n.css({position:"relative"}),$('[bmg-data = "nav-fixer-css"]').remove()})})();
